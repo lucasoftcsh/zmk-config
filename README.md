@@ -1,7 +1,7 @@
 # eiga's zmk-config
 
 ### Table of contents
-- Branches
+- Branches 
     - [Corne](#corne)
     - [Charybdis](#charybdis)
         - [Module documentation](#module-documentation)
