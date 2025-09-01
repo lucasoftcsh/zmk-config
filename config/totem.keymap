@@ -159,7 +159,6 @@
             >;
         };
 
-        // ----- ZMK Studio Support -----
-        &studio_unlock;
+        
     };
 };
