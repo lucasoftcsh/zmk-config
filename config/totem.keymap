@@ -133,5 +133,6 @@
 
             label = "Gaming+";
         };
+    &studio_unlock;
     };
 };
