@@ -24,8 +24,8 @@
             bindings = <
 &trans  &kp DEL         &kp C           &kp Y        &kp F        &kp K           &kp Z         &kp L         &kp COMMA    &kp U            &kp Q            &trans
 &trans  &mt LEFT_GUI R  &mt LEFT_ALT S  &mt LCTRL T  &mt LSHFT H  &kp P           &kp W         &mt RSHFT N   &mt RCTRL A  &mt RIGHT_ALT I  &mt RIGHT_GUI O  &trans
-&trans  &kp J           &kp V           &kp G        &kp D        &lt 9 B         &lt 14 X      &kp M         &kp PERIOD   &kp BACKSPACE    &trans           &trans
-                                        &lt 11 TAB   &lt 8 E      &lt 1 ESCAPE    &lt 13 ENTER  &lt 12 SPACE  &trans
+&trans  &kp J           &kp V           &kp G        &kp D        &lt 10 B        &lt 15 X      &kp M         &kp PERIOD   &kp BACKSPACE    &trans           &trans
+                                        &lt 12 TAB   &lt 9 E      &lt 1 ESCAPE    &lt 14 ENTER  &lt 13 SPACE  &trans
             >;
         };
 
@@ -50,7 +50,7 @@
             bindings = <
 &none  &none         &none         &none      &none      &none    &none      &none          &none          &none         &none      &none
 &none  &kp LEFT_GUI  &kp LEFT_ALT  &kp LCTRL  &kp LSHFT  &none    &kp CAPS   &kp LEFT       &kp DOWN       &kp UP_ARROW  &kp RIGHT  &none
-&none  &none         &none         &none      &tog 14    &none    &kp INS    &kp HOME       &kp PAGE_DOWN  &kp PG_UP     &kp END    &none
+&none  &none         &none         &none      &tog 15    &none    &kp INS    &kp HOME       &kp PAGE_DOWN  &kp PG_UP     &kp END    &none
                                    &none      &none      &none    &kp ENTER  &kp BACKSPACE  &none
             >;
         };
@@ -100,6 +100,15 @@
             >;
         };
 
+        Function {
+            bindings = <
+&none  &none   &kp F9  &kp F8  &kp F7  &kp F10    &none  &none      &none      &none     &none     &none
+&none  &kp F4  &kp F3  &kp F2  &kp F1  &kp F11    &none  &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
+&none  &none   &none   &kp F6  &kp F5  &kp F12    &none  &none      &none      &none     &none     &none
+                       &none   &none   &none      &none  &none      &none
+            >;
+        };
+
         Raise {
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
@@ -110,7 +119,7 @@
             label = "Raise";
             bindings = <
 &trans  &kp EXCL      &kp AT      &kp HASH    &kp DLLR      &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp DEL
-&trans  &bt BT_CLR    &bt BT_PRV  &bt BT_NXT  &trans        &to 9        &kp UNDER  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&trans  &bt BT_CLR    &bt BT_PRV  &bt BT_NXT  &trans        &to 10       &kp UNDER  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
 &trans  &out OUT_TOG  &trans      &trans      &trans        &trans       &kp MINUS  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
                                   &kp LGUI    &kp LEFT_ALT  &kp SPACE    &kp RET    &trans     &kp RALT
             >;
@@ -120,7 +129,7 @@
             label = "Game";
             bindings = <
 &trans  &trans  &trans  &trans  &trans        &trans    &trans  &trans         &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans        &sl 10    &trans  &trans         &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans        &sl 11    &trans  &trans         &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans        &trans    &trans  &trans         &trans  &trans  &trans  &to 0
                         &trans  &kp LEFT_ALT  &trans    &trans  &kp RIGHT_WIN  &trans
             >;
@@ -130,7 +139,7 @@
             label = "Game ++";
             bindings = <
 &kp N0   &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5    &kp LC(RA(Y))  &kp LC(RA(U))  &kp LC(RA(I))  &kp LC(RA(H))  &kp LC(RA(J))  &kp LC(RA(DEL))
-&to 9    &kp L         &kp O         &kp Y         &kp K         &kp G           &kp F5         &trans         &trans         &trans         &trans         &kp LA(F4)
+&to 10   &kp L         &kp O         &kp Y         &kp K         &kp G           &kp F5         &trans         &trans         &trans         &trans         &kp LA(F4)
 &kp F10  &none         &to 0         &none         &kp NUMBER_6  &kp NUMBER_7    &trans         &trans         &trans         &trans         &trans         &to 0
                                      &kp J         &kp I         &kp M           &trans         &trans         &trans
             >;
