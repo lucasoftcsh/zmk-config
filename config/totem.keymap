@@ -80,6 +80,11 @@
             bindings = <&kp LC(Z)>;
             key-positions = <32 21>;
         };
+
+        search {
+            bindings = <&kp LC(F)>;
+            key-positions = <32 14>;
+        };
     };
 
     keymap {
