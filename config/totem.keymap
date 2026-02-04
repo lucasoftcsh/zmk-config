@@ -131,7 +131,7 @@
                                             &kp J         &kp I         &kp M  &trans  &trans  &trans
             >;
 
-            label = "Gaming+";
+            label = "Gaming++";
         };
     };
 };
