@@ -77,7 +77,7 @@
             bindings = <
                 &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &kp CARET  &kp AMPERSAND  &kp KP_ASTERISK  &kp SQT  &kp DQT
                 &trans    &trans  &trans    &trans      &trans         &trans     &trans         &trans           &kp HOME &kp BSLH
-&studio_unlock  &trans    &trans  &trans    &trans      &trans         &kp UNDER  &kp EQUAL      &kp PLUSe         &trans   &kp SLASH  &kp PIPE
+&studio_unlock  &trans    &trans  &trans    &trans      &trans         &kp UNDER  &kp EQUAL      &kp PLUS         &trans   &kp SLASH  &kp PIPE
                                   &trans    &trans      &trans         &trans     &trans         &trans
             >;
         };
