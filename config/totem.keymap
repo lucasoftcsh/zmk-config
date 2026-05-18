@@ -8,21 +8,18 @@
 //                                                             ▀▀▀▀▀    █  █  █      ▀
 //                                                                      ▀  ▀  ▀
 //
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define Base        0
-#define Nav         1
-#define Sym         2
-#define Fun         3
-#define Game        4
-#define Gameplus    5
+#define Base    0
+#define Nav     1
+#define Fn      2
+
 
 &mt {
     quick-tap-ms = <100>;
-    global-quick-tap;
+    require-prior-idle-ms = <100>;
     flavor = "tap-preferred";
     tapping-term-ms = <170>;
 };
@@ -31,84 +28,122 @@
     tapping-term-ms = <240>;
     flavor = "balanced";
     quick-tap-ms = <150>;
+    require-prior-idle-ms = <150>;
 };
 
+
 / {
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
+
+    macros {
+        m_altf4: m_altf4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(F4)>;
+        };
+
+        m_selline: m_selline {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp HOME &kp LS(END)>;
+        };
+
+        m_reopen: m_reopen {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(T))>;
+        };
+
+        m_scrshot: m_scrshot {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LS(S))>;
         };
     };
 
-    combos { compatible = "zmk,combos"; };
+
+    behaviors {
+        td_shft: td_shft {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&kp CAPS>;
+        };
+
+        td_rshft: td_rshft {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>;
+            bindings = <&kp RSHFT>, <&kp SQT>;
+        };
+
+        mm_minus: mm_minus {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp UNDER>, <&kp MINUS>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_ralt {
+            timeout-ms = <50>;
+            key-positions = <20 33>;
+            bindings = <&kp RALT>;
+        };
+
+        combo_lalt {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&sk LALT>;
+        };
+
+        combo_lgui {
+            timeout-ms = <50>;
+            key-positions = <21 22>;
+            bindings = <&sk LGUI>;
+        };
+
+        combo_altf4 {
+            timeout-ms = <100>;
+            key-positions = <34 0>;
+            bindings = <&kp LA(F4)>;
+        };
+    };
+
 
     keymap {
         compatible = "zmk,keymap";
 
         Base {
             display-name = "Base";
-            bindings = <
-           &kp Q       &kp W       &kp E          &kp R         &kp T        &kp Y    &kp U        &kp I        &kp O       &kp P
-           &hm LGUI A  &hm LALT S  &hm LCTRL D    &hm LSHIFT F  &kp G        &kp H    &hm RSHFT J  &hm RCTRL K  &hm RALT L  &hm RGUI SEMICOLON
-&lt 3 TAB  &kp Z       &kp X       &kp C          &kp V         &kp B        &kp N    &kp M        &kp COMMA    &kp DOT     &kp SLASH           &kp APOSTROPHE
-                                   &mt LCTRL DEL  &lt 1 ESC     &kp SPACE    &kp RET  &lt 2 BSPC   &kp MINUS
+            bindings = 
+                &kp Q       &kp W       &kp E          &kp R         &kp T          &kp Y      &kp U          &kp I       &kp O       &kp P
+                &kp A       &kp S       &kp D          &kp F         &kp G          &kp H      &kp J          &kp K       &kp L       &kp SEMI
+    &td_shft    &kp Z       &kp X       &kp C          &kp V         &kp B          &kp N      &kp M          &kp COMMA   &kp DOT     &kp FSLH     &td_rshft
+                                        &kp ESC        &lt 2 SPACE   &mt LCTRL DEL  &kp BSPC   &lt 1 RET      &kp TAB
             >;
         };
 
         Nav {
             display-name = "Nav";
-            bindings = <
-              &kp TILDE       &kp LS(TAB)  &trans        &kp TAB    &kp LBRC    &kp RBRC  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0
-              &kp LEFT_SHIFT  &kp LEFT     &kp UP_ARROW  &kp RIGHT  &kp LBKT    &kp RBKT  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &trans
-&kp LEFT_ALT  &trans          &kp MINUS    &kp DOWN      &kp PLUS   &kp LPAR    &kp RPAR  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans        &trans
-                                           &trans        &trans     &trans      &trans    &trans        &kp DOT
+            bindings = 
+                &kp N1      &kp N2      &kp N3         &kp N4        &kp N5         &kp PG_UP  &kp TILDE      &kp HOME    &kp GRAVE   &kp CAPS
+                &kp N6      &kp N7      &kp N8         &kp N9        &kp N0         &kp LEFT   &kp DOWN       &kp UP      &kp RIGHT   &kp DEL
+    &kp LSHFT   &kp BSLH    &kp LBKT    &kp RBKT       &kp EQUAL     &mm_minus      &kp PG_DN  &kp LC(LEFT)   &kp END     &kp LC(RIGHT) &kp PSCRN  &kp RSHFT
+                                        &kp LGUI       &trans        &mt LCTRL DEL  &kp BSPC   &trans         &kp TAB
             >;
         };
 
-        Sym {
-            display-name = "Sym";
-            bindings = <
-                &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &kp CARET  &kp AMPERSAND  &kp KP_ASTERISK  &kp SQT  &kp DQT
-                &trans    &trans  &trans    &trans      &trans         &trans     &trans         &trans           &trans   &trans
-&studio_unlock  &trans    &trans  &trans    &trans      &trans         &kp UNDER  &kp EQUAL      &trans           &trans   &kp BACKSLASH  &kp HOME
-                                  &trans    &trans      &trans         &trans     &trans         &trans
-            >;
-        };
-
-        Fun {
-            display-name = "Fun";
-            bindings = <
-        &bootloader  &trans  &trans  &trans  &to 4     &trans  &trans  &trans  &kp END  &kp F1
-        &trans       &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans   &kp F10
-&trans  &trans       &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans   &kp F20  &kp F7
-                             &trans  &trans  &trans    &trans  &trans  &trans
-            >;
-        };
-
-        Gaming {
-            display-name = "Game";
-            bindings = <
-            &kp Z           &kp X  &kp C      &kp V         &sl 5     &trans  &trans  &trans  &trans  &trans
-            &kp TAB         &kp Q  &kp W      &kp E         &kp R     &trans  &trans  &trans  &trans  &trans
-&kp ESCAPE  &kp LEFT_SHIFT  &kp A  &kp S      &kp D         &kp F     &trans  &trans  &trans  &trans  &trans  &trans
-                                   &kp LCTRL  &kp LEFT_ALT  &trans    &trans  &trans  &trans
-            >;
-        };
-
-        Gaming+ {
-            display-name = "Game+";
-            bindings = <
-         &kp N0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp T    &kp RA(RC(Y))  &kp RA(RC(U))  &trans  &trans  &kp LC(RA(DEL))
-         &trans  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp G    &kp F5         &kp F7         &trans  &trans  &kp F12
-&kp F10  &kp L   &kp O         &kp Y         &kp K         &to 0    &trans         &trans         &trans  &trans  &kp F22          &kp LA(F4)
-                               &kp J         &kp I         &kp M    &trans         &trans         &trans
+        Fn {
+            display-name = "Fn";
+            bindings = 
+                &kp F1      &kp F2      &kp F3         &kp F4        &kp F5         &kp F6     &kp F7         &kp F8      &kp F9      &kp F10
+                &kp F11     &kp F12     &none          &none         &none          &none      &none          &none       &none       &m_reopen
+    &none       &none       &none       &none          &none         &m_scrshot     &none      &none          &none       &none       &none        &none
+                                        &none          &trans        &none          &m_selline &trans         &m_altf4
             >;
         };
     };
